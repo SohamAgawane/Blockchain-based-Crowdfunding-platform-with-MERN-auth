@@ -2,27 +2,58 @@ import React from "react";
 
 const Footer = () => {
   return (
+    <footer className="relative w-full border-t border-slate-400/70 bg-transparent">
+      {/* soft gradient glow */}
+      <div className="pointer-events-none absolute -top-16 inset-x-0 h-24 bg-gradient-to-r from-sky-200/40 via-emerald-200/30 to-indigo-200/40 blur-3xl" />
 
-    
-    <footer className="bg-white text-[#000] px-8 py-4 relative">
-      <hr/>
-      <div className="container flex flex-col justify-center items-center mx-auto relative z-10 text-white">
-        <div className="sm:flex sm:justify-between sm:mx-10">
-          <div className="text-center text-[#000] sm:text-left py-4 sm:py-0">
-            <h2 className="text-2xl p-3 text-center font-semibold">PRO FUND</h2>
-            <p className=" text-md">
-              We are a crowdfunding platform with a vision to create a social
-              impact.
-            </p>
-            <p className="text-center text-sm">
-              Let us make this world a better place to live together.
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col items-center space-y-6 text-center">
+
+          {/* Brand */}
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              <span className="bg-gradient-to-r from-sky-500 via-emerald-500 to-indigo-500 bg-clip-text text-transparent">
+                PRO FUND
+              </span>
+            </h2>
+
+            <p className="text-sm text-slate-600 max-w-md mx-auto">
+              A blockchain-native crowdfunding protocol built for transparent,
+              impact-first funding.
             </p>
           </div>
-        </div>
-        <div className="m-5 text-center cursor-pointer">
-          <a className="text-green-500 font-semibold text-md mr-2 hover:text-blue-500">Home</a>
-          <a className="text-green-500 font-semibold text-md mr-2 hover:text-blue-500">About Us</a>
-          <a className="text-green-500 font-semibold text-md mr-2 hover:text-blue-500">Contact Us</a>
+
+          {/* Nav Links */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
+            <a
+              href="#home"
+              className="text-slate-600 hover:text-sky-600 transition"
+            >
+              Home
+            </a>
+
+            <a
+              href="#about-us"
+              className="text-slate-600 hover:text-emerald-600 transition"
+            >
+              About
+            </a>
+
+            <a
+              href="#contact-us"
+              className="text-slate-600 hover:text-indigo-600 transition"
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Divider */}
+          <div className="w-24 h-[1px] bg-gradient-to-r from-sky-400/40 via-emerald-400/40 to-indigo-400/40" />
+
+          {/* Bottom line */}
+          <p className="text-xs text-slate-400">
+            © {new Date().getFullYear()} Pro Fund • Soham Agawane
+          </p>
         </div>
       </div>
     </footer>

@@ -7,12 +7,11 @@ import { handleSuccess, handleError } from "../util";
 
 const ContactUs = () => {
   const [loggedInUser, setLoggedInUser] = useState("");
+  const form = useRef();
 
   useEffect(() => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
   }, []);
-
-  const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -23,86 +22,118 @@ const ContactUs = () => {
       })
       .then(
         () => {
-          handleSuccess("SUCCESS!");
+          handleSuccess("Message sent successfully.");
           e.target.reset();
-        },
-        (error) => {
-          handleError("FAILED...");
+      },
+        () => {
+          handleError("Failed to send message. Try again.");
         }
       );
   };
 
   return (
-    <div className="mx-auto max-w-7xl p-5">
-      <div
-        id="contact-us"
-        className="flex mb-4 rounded-xl mx-auto bg-[#1c1c24] sm:p-6 flex-col md:flex-row md:gap-20 md:p-10"
-        style={{
-          backgroundImage: `linear-gradient(to right, #f78484, #5eea96)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-          <img
-            src={contactImg}
-            alt="Illustration"
-            className="w-full lg:w-3/4 xl:w-4/5 scale-105 sm:p-2 md:scale-100 animate-moveUpDown"
-            style={{
-              animation: "moveUpDown 3s infinite",
-            }}
-          />
+    <section id="contact-us" className="w-full">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        {/* Heading */}
+        <div className="mb-8 text-center space-y-2">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-slate-400">
+            Contact
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+            <span className="bg-gradient-to-r from-sky-500 via-emerald-500 to-indigo-500 bg-clip-text text-transparent">
+              Talk to the Pro Fund team.
+            </span>
+          </h2>
+          <p className="text-sm sm:text-[0.95rem] text-slate-600 max-w-xl mx-auto">
+            Have a campaign in mind, want to onboard your NGO, or explore an
+            integration? Drop us a message and we’ll get back on your preferred rail.
+          </p>
         </div>
 
-        <div className="w-full lg:w-1/2 mt-10 md:mt-0 flex flex-col justify-center">
-          <h1 className="text-xl font-bold text-gray-100 md:text-3xl lg:text-4xl">
-            Get In Touch
-          </h1>
-          <form ref={form} onSubmit={sendEmail} className="mt-5 space-y-3">
-            <label className="block">
-              <span className="text-gray-950">Name:</span>
-              <input
-                className="mt-1 p-2 bg-transparent border-2 border-gray-200 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                type="text"
-                name="user_name"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-950">Email:</span>
-              <input
-                className="mt-1 p-2 bg-transparent border-2 border-gray-200 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                type="email"
-                name="user_email"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-950">Message:</span>
-              <textarea
-                className="mt-1 p-3 h-40 bg-transparent border-2 border-gray-200 block w-full rounded-md  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                name="message"
-              ></textarea>
-            </label>
+        {/* Main layout */}
+        <div className="grid gap-10 lg:grid-cols-[1.1fr,1fr] items-center">
+          {/* FORM SIDE */}
+          <div className="relative">
+            {/* subtle gradient halo */}
+            <div className="pointer-events-none absolute -inset-4 rounded-3xl bg-gradient-to-r from-sky-300/25 via-emerald-300/20 to-indigo-300/25 blur-2xl" />
 
-            {loggedInUser ? (
-              <>
-                <input
-                  className="py-2 text-lg font-semibold border border-transparent rounded-md bg-white text-green-700 hover:bg-green-700 hover:text-white transition duration-300 mt-1 block w-full px-3 shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  type="submit"
-                  value="Send"
+            <div className="relative rounded-3xl border border-slate-200/70 bg-white/70 backdrop-blur-xl shadow-[0_18px_40px_rgba(15,23,42,0.12)] px-5 py-6 sm:px-7 sm:py-7">
+              <form ref={form} onSubmit={sendEmail} className="space-y-4">
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                    Name
+                  </label>
+                  <input
+                    className="w-full rounded-xl border border-slate-200 bg-white/60 px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
+                    type="text"
+                    name="user_name"
+                    placeholder="Your full name"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                    Email
+                  </label>
+                  <input
+                    className="w-full rounded-xl border border-slate-200 bg-white/60 px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
+                    type="email"
+                    name="user_email"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
+                    Message
+                  </label>
+                  <textarea
+                    className="w-full rounded-xl border border-slate-200 bg-white/60 px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-100 min-h-[140px] resize-none"
+                    name="message"
+                    placeholder="Tell us about your campaign, integration idea, or question."
+                  />
+                </div>
+
+                {loggedInUser ? (
+                  <input
+                    className="mt-2 inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 hover:shadow-md"
+                    type="submit"
+                    value="Send message"
+                  />
+                ) : (
+                  <div className="mt-2 rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-3 text-center">
+                    <p className="text-[13px] font-medium text-amber-800">
+                      Please log in to send a message via the dashboard.
+                    </p>
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+
+          {/* IMAGE / INFO SIDE */}
+          <div className="flex flex-col items-center lg:items-start gap-6">
+            <div className="relative w-full max-w-sm">
+              {/* subtle floating glow */}
+              <div className="pointer-events-none absolute -top-8 -right-4 h-32 w-32 rounded-full bg-sky-200/50 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-10 -left-4 h-32 w-32 rounded-full bg-emerald-200/50 blur-3xl" />
+
+              <div className="relative mx-auto flex items-center justify-center">
+                <img
+                  src={contactImg}
+                  alt="Contact illustration"
+                  className="w-full max-w-xs sm:max-w-sm drop-shadow-xl animate-moveUpDown"
+                  style={{ animation: "moveUpDown 3s ease-in-out infinite" }}
                 />
-              </>
-            ) : (
-              <div>
-                <p className="text-black text-center text-lg font-semibold">
-                  Please log-in first to access contact.
-                </p>
               </div>
-            )}
-          </form>
+            </div>
+
+          </div>
         </div>
       </div>
+
       <ToastContainer />
-    </div>
+    </section>
   );
 };
 

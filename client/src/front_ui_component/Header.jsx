@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
+import {
+  Home as HomeIcon,
+  Info,
+  Mail,
+  Wallet2,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 import { handleSuccess } from "../util";
 
 function Header({ onClick }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,146 +29,100 @@ function Header({ onClick }) {
     navigate("/");
   };
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const navItemClass =
-    "block py-2 px-4 text-lg font-medium text-green-700 hover:text-black transition duration-300";
-
-  const buttonClass =
-    "px-4 py-2 text-lg font-semibold border border-transparent rounded-md bg-white text-green-700 hover:bg-green-700 hover:text-white transition duration-300";
-
   return (
-    <header className="fixed top-0 w-full bg-white text-green-700 shadow-md z-50">
-      <nav className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-20">
+    // CENTERED FLOATING HEADER
+    <header className="fixed top-5 sm:top-7 inset-x-0 z-50 flex justify-center pointer-events-none">
+      <motion.div
+        initial={{ y: -16, opacity: 0, scale: 0.95 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        className="pointer-events-auto flex items-center gap-5 sm:gap-6 px-6 sm:px-8 py-2.5 rounded-full border border-slate-200 bg-white/80 shadow-lg shadow-slate-900/5 backdrop-blur-md"
+      >
+        {/* BRAND */}
         <Link
           to="home"
           spy={true}
           smooth={true}
           offset={-100}
           duration={500}
-          className="text-2xl font-bold cursor-pointer"
+          className="flex items-center gap-2 cursor-pointer"
         >
-          PRO FUND
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 shadow-sm">
+            <HomeIcon className="h-4 w-4 text-white" />
+          </div>
+          <span className="hidden sm:inline text-sm font-semibold tracking-tight text-slate-900">
+            PRO FUND
+          </span>
         </Link>
 
-        <ul className="hidden cursor-pointer md:flex space-x-6">
-          <li>
-            <Link
-              to="about-us"
-              spy={true}
-              smooth={true}
-              offset={-85}
-              duration={500}
-              className={navItemClass}
-            >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="contact-us"
-              spy={true}
-              smooth={true}
-              offset={-115}
-              duration={500}
-              className={navItemClass}
-            >
-              Contact Us
-            </Link>
-          </li>
-        </ul>
+        {/* DIVIDER */}
+        <span className="h-5 w-px bg-slate-200" />
 
-     
-        <div className="hidden md:flex items-center space-x-4">
+        {/* SCROLL LINKS */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            to="about-us"
+            spy={true}
+            smooth={true}
+            offset={-85}
+            duration={500}
+            activeClass="text-slate-900"
+            className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-600 hover:text-slate-900 cursor-pointer transition-colors"
+          >
+            <Info className="h-4 w-4" />
+            <span className="hidden sm:inline">About</span>
+          </Link>
+
+          <Link
+            to="contact-us"
+            spy={true}
+            smooth={true}
+            offset={-115}
+            duration={500}
+            activeClass="text-slate-900"
+            className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-600 hover:text-slate-900 cursor-pointer transition-colors"
+          >
+            <Mail className="h-4 w-4" />
+            <span className="hidden sm:inline">Contact</span>
+          </Link>
+        </div>
+
+        {/* DIVIDER */}
+        <span className="h-5 w-px bg-slate-200" />
+
+        {/* AUTH ACTIONS */}
+        <div className="flex items-center gap-2 sm:gap-3">
           {isAuthenticated ? (
             <>
-              <NavLink to="/crowd-funding">
-                <button onClick={onClick} className={`border border-green-400 px-4 py-2 text-lg font-semibold rounded-md bg-white text-green-700 hover:bg-green-700 hover:text-white transition duration-300`}>
-                  Crowd Funding
-                </button>
+              <NavLink
+                to="/crowd-funding"
+                onClick={onClick}
+                className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+              >
+                <Wallet2 className="h-4 w-4" />
+                <span className="hidden sm:inline">Dashboard</span>
               </NavLink>
-              <button onClick={handleLogout} className={buttonClass}>
-                Logout
+
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs sm:text-sm font-medium text-rose-500 hover:bg-rose-50 transition-colors"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </>
           ) : (
-            <NavLink to="/login">
-              <button onClick={onClick} className={buttonClass}>
-                Log In
-              </button>
+            <NavLink
+              to="/login"
+              onClick={onClick}
+              className="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+            >
+              <LogIn className="h-4 w-4" />
+              <span>Log In</span>
             </NavLink>
           )}
         </div>
-      </nav>
-  
-      {isMenuOpen && (
-        <div className="md:hidden bg-blue-700 text-white">
-          <ul className="flex flex-col items-center space-y-4 py-4">
-            <li>
-              <Link
-                to="about-us"
-                spy={true}
-                smooth={true}
-                offset={-85}
-                duration={500}
-                className={navItemClass}
-                onClick={toggleMenu}
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="contact-us"
-                spy={true}
-                smooth={true}
-                offset={-115}
-                duration={500}
-                className={navItemClass}
-                onClick={toggleMenu}
-              >
-                Contact Us
-              </Link>
-            </li>
-            {isAuthenticated ? (
-              <>
-                <NavLink to="/crowd-funding">
-                  <button
-                    onClick={() => {
-                      onClick();
-                      toggleMenu();
-                    }}
-                    className={buttonClass}
-                  >
-                    Crowd Funding
-                  </button>
-                </NavLink>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    toggleMenu();
-                  }}
-                  className={buttonClass}
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <NavLink to="/login">
-                <button
-                  onClick={() => {
-                    onClick();
-                    toggleMenu();
-                  }}
-                  className={buttonClass}
-                >
-                  Log In
-                </button>
-              </NavLink>
-            )}
-          </ul>
-        </div>
-      )}
+      </motion.div>
     </header>
   );
 }
