@@ -1,40 +1,58 @@
 import React from "react";
 
+/**
+ * FormField (JSX)
+ *
+ * Props:
+ * - labelName (string) : label text shown above the input
+ * - placeholder (string)
+ * - inputType (string)  : e.g. "text", "url", "date"
+ * - isTextArea (bool)
+ * - value
+ * - handleChange (fn)
+ * - rows (number) optional for textarea (default 6)
+ * - required (bool) optional (default true)
+ *
+ * Compatible with your current usage.
+ */
 const FormField = ({
   labelName,
   placeholder,
-  inputType,
-  isTextArea,
+  inputType = "text",
+  isTextArea = false,
   value,
   handleChange,
+  rows = 6,
+  required = true,
 }) => {
   return (
     <label className="flex-1 w-full flex flex-col">
       {labelName && (
-        <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#000000] mb-[10px]">
+        <span className="mb-2 text-sm font-medium text-slate-800">
           {labelName}
         </span>
       )}
 
       {isTextArea ? (
         <textarea
-          required
+          required={required}
           value={value}
           onChange={handleChange}
-          type={inputType}
-          rows={10}
+          rows={rows}
           placeholder={placeholder}
-          className="py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-black text-[18px] placeholder:text-[#4b5264] rounded-[10px] sm:min-w-[300px]"
+          aria-label={labelName || placeholder}
+          className="resize-none w-full min-h-[140px] px-4 py-3 rounded-xl border border-slate-200 bg-white/60 backdrop-blur-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-shadow shadow-sm"
         />
       ) : (
         <input
-          required
+          required={required}
           value={value}
           onChange={handleChange}
           type={inputType}
-          step="0.1"
+          step={inputType === "number" ? "0.01" : undefined}
           placeholder={placeholder}
-          className="py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-black text-[18px] placeholder:text-[#4b5264] rounded-[10px] sm:min-w-[300px]"
+          aria-label={labelName || placeholder}
+          className="w-full h-12 px-4 py-3 rounded-xl border border-slate-200 bg-white/60 backdrop-blur-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-shadow shadow-sm"
         />
       )}
     </label>

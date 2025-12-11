@@ -48,7 +48,7 @@ const Home = ({ onClick, isAuthenticated }) => {
                 </h1>
                 <p className="mt-3 max-w-md text-sm sm:text-base text-slate-600">
                   Launch and track campaigns from a single, focused interface.
-                  No noise, just the essentials — unlocked when you connect.
+                  No noise, just the essentials - unlocked when you connect.
                 </p>
               </div>
 

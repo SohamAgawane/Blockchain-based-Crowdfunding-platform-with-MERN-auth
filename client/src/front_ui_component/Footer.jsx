@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col items-center space-y-6 text-center">
 
           {/* Brand */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">
               <span className="bg-gradient-to-r from-sky-500 via-emerald-500 to-indigo-500 bg-clip-text text-transparent">
                 PRO FUND
@@ -21,7 +21,7 @@ const Footer = () => {
               A blockchain-native crowdfunding protocol built for transparent,
               impact-first funding.
             </p>
-          </div>
+          </div> */}
 
           {/* Nav Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">

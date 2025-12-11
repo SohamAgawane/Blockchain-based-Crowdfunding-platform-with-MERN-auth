@@ -1,11 +1,19 @@
 import React from "react";
 
-const CustomButton = ({ btnType, title, handleClick, styles }) => {
+const CustomButton = ({ btnType = "button", title, handleClick, styles = "" }) => {
   return (
     <button
       type={btnType}
-      className={`font-epilogue font-semibold text-[16px] leading-[26px] text-green-700 min-h-[52px] px-4 rounded-[10px] ${styles}`}
       onClick={handleClick}
+      className={`
+        relative inline-flex items-center justify-center
+        font-semibold text-[16px] px-5 py-3 rounded-xl
+        transition-all duration-200 select-none
+        bg-gradient-to-r from-emerald-500 to-sky-500 text-white
+        shadow-md hover:shadow-lg hover:scale-[1.02]
+        active:scale-[0.98]
+        ${styles}
+      `}
     >
       {title}
     </button>

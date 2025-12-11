@@ -2,12 +2,20 @@ import React from "react";
 
 const CountBox = ({ title, value }) => {
   return (
-    <div className="flex flex-col items-center w-[150px]">
-      <h4 className="font-epilogue font-bold text-[30px] text-white p-3 bg-[#1c1c24] rounded-t-[10px] w-full text-center truncate">
+    <div
+      className="w-full rounded-2xl backdrop-blur-md border border-white/40 
+                 shadow-sm hover:shadow-md transition-all flex flex-col items-center p-4"
+    >
+      {/* VALUE */}
+      <div
+        className="w-full text-center py-3 px-4 rounded-xl text-white font-extrabold text-2xl
+                   bg-gradient-to-r from-emerald-500 to-sky-400 shadow-md"
+      >
         {value}
-      </h4>
+      </div>
 
-      <p className="font-epilogue font-normal text-[16px] text-[#808191] bg-[#28282e] px-3 py-2 rounded-b-[10px] w-full text-center">
+      {/* TITLE */}
+      <p className="mt-3 text-sm font-semibold text-slate-700 tracking-wide text-center">
         {title}
       </p>
     </div>

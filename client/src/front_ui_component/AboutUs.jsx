@@ -239,7 +239,7 @@ const AboutUs = () => {
                   Pro Fund is a blockchain-native crowdfunding layer that
                   connects global supporters with verified NGOs and charities in
                   India. Contributions are routed through audited smart
-                  contracts and expressed as real products and services — not
+                  contracts and expressed as real products and services - not
                   just balances on a screen.
                 </p>
 
